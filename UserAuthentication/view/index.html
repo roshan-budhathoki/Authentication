@@ -79,6 +79,7 @@
 		e.preventDefault();
 	});
 	function formSubmit(store, type){
+		
 		$.ajax({
 			type: "POST",
 			url: "../backend/userStore.php?do=" + type,
