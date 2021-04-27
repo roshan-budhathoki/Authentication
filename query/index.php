@@ -17,7 +17,11 @@ echo $key['image'];
 }
 
 
-//var_dump($result);
+
+
+
+
+var_dump($result);
 // while($r = mysqli_fetch_assoc($query)){
 
 
