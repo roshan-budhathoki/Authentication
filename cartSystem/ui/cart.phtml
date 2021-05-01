@@ -1,0 +1,27 @@
+<?php
+
+global $ry,$sqlConnect;
+
+$query = mysqli_query($sqlConnect,"SELECT * FROM cart INNER JOIN products ON cart.product_id = products.id WHERE cart.user_id='{$ry['user']['user_id']}'");
+
+$result = mysqli_fetch_all($query,MYSQLI_ASSOC);
+
+?>
+
+
+<?php if(mysqli_num_rows($query) > 0 ){?>
+  <?php foreach($result as $key){?>
+<div class="row"><div class="card" style="width: 18rem;">
+<img class="card-img-top" src="<?php echo $ry['site_url'];?>/<?php echo $key['image'];?>" alt="Card image cap">
+<div class="card-body" style="background-color:black;">
+  <h5 class="card-title"><?php echo $key['name'];?></h5>
+  <p class="card-text">NPR <?php echo $key['price'];?></p>
+  <p class="card-text">Quantity : <?php echo $key['quantity'];?></p>
+  <a href="javascript:void(0)" onclick="cart('delete','<?php echo $key['product_id'];?>')" class="btn btn-primary">Delete From Cart</a>
+</div>
+</div>
+<?php }?>
+</div>
+<?php }else{ ?>
+cart is empty
+  <?php } ?>
