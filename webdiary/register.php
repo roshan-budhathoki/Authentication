@@ -1,7 +1,6 @@
 <?php
 
     include 'config.php';
-
     if(isset($_POST['submit'])){
         $name = $_POST['username'];
         $email = $_POST['email'];
