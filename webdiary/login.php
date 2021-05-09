@@ -12,8 +12,17 @@
             $query = mysqli_query($connect, "SELECT * FROM user WHERE user_name = '$username' AND user_password = '$hassedPassword'");
             $result = mysqli_fetch_assoc($query);
             if(mysqli_num_rows($query) > 0){
-                    setcookie("newUser", $result['user_id'], time() + ( 24 * 60 * 60 ));
-                    header('location: twofactorauth.php');
+                    setcookie("newUsers", $result['user_id'], time() + ( 7 * 24 * 60 * 60 ));
+                    $values = $_COOKIE["newUsers"];
+                    echo $values;
+                    // $randomValue = rand(1000, 10000);
+                    // $checker = mysqli_query($connect, "INSERT INTO twofactor (user_number, code) VALUES ('$values', '$randomValue')");
+                    // if($checker){
+                    //     header('location: twofactorauth.php');
+                    // }
+                    // else{
+                    //     echo "Code is not generated.";
+                    // }
             }else{
                 echo "no such user found";
             }

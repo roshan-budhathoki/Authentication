@@ -1,16 +1,26 @@
 <?php
-echo "Hi, I am authnetication";
-    $toemail = "budhathoki.roshan321@gmail.com";
-
-    $subject = "Verification code.";
-
-    $body  = "This is your verification code: 8989.";
-
-    $headers = "From: senders\'s email";
-
-    if(mail($toemail, $subject, $body, $headers)){
-        echo "Email is sent successfully.";
-    } else {
-        echo "Email is not sent";
+include 'config.php';
+    echo "Enter the code sent in your database.";
+    if(isset($_POST['submit'])){
+        $code = $_POST['code'];
+        $values = $_COOKIE['newUsers'];
+        echo $values;
+        $db_code = mysqli_query($connect, "SELECT * FROM twofactor WHERE user_number = 0");
+        $result = mysqli_fetch_assoc($db_code);
+        if($code == $result['code']){
+            header('location: dashboard.php');
+        }else{
+            echo "please enter the valid code";
+        }
     }
 ?>
+
+<html>
+    <body>
+        <form method = 'post'>
+            <h2>Enter the code:</h2><br><br>
+            <input type="text" name = "code"><br><br>
+            <input type="submit" name = 'submit'>
+        </form>
+    </body>
+</html>
