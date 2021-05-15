@@ -94,12 +94,17 @@
         $result = mysqli_fetch_all($query);
         return $result;
     }
-    function getEnrollCourse($value){
+    function getEnrollCourse(){
         global $connect;
-        $checker = mysqli_query($connect, "SELECT * FROM user_course WHERE user_id = '$value'");
-        $query = mysqli_query($connect, "SELECT * FROM course");
+        $checker = mysqli_query($connect, "SELECT * FROM user_course");
+        if(mysqli_num_rows($checker) == 0){
+            $finalQuery = mysqli_query($connect, "SELECT * FROM course");
+            $result = mysqli_fetch_all($finalQuery);
+            return $result;
+        }
+        $query = mysqli_query($connect, "SELECT * FROM course INNER JOIN user_course ON NOT course.course_id = user_course.course_id");
         $courses = mysqli_fetch_all($query);
-        return $result;
+        return $courses;
     }
     function getStudent($value){
         global $connect;
@@ -123,13 +128,14 @@
         $query = mysqli_query($connect, "UPDATE course SET course_name = '$name', enrolled_date = '$date', student_capacity = '$capacity' WHERE course_id = '$id'");
     }
     function enrollCourse($user_id, $course_id){
-        $enrollStatus = True;
-        $query = mysqli_query($connect, "INSERT INTO user_course (user_id, course_id, enrolled_status) VALUES ('user_id', '$course_id', '$enrollStatus')");
+        global $connect;
+        $enrollStatus = "true";
+        $query = mysqli_query($connect, "INSERT INTO user_course (user_id, course_id, enrolled_status) VALUES ('$user_id', '$course_id', '$enrollStatus')");
     }
     function getEnrolledCourse(){
-
-    }
-    function studentCourse(){
-
+        global $connect;
+        $query = mysqli_query($connect, "SELECT * FROM course INNER JOIN user_course ON course.course_id = user_course.course_id");
+        $courses = mysqli_fetch_all($query);
+        return $courses;
     }
 ?>

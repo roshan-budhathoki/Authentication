@@ -26,14 +26,13 @@
     if(isset($_POST['deletecourse'])){
         var_dump($storage);
     }
-    $courses = getCourse();
     if(isset($_GET['del'])){
         $delete  = deleteCourse($_GET['del']);
         header('location: dashboard.php');
     }
-    if(isset($_GET['id']){
-        $value = getCourses($_GET['id']);
-
+    if(isset($_GET['id'])){
+        enrollCourse($_COOKIE['users'],$_GET['id']);
+        header('location: dashboard.php');
     }
 ?>
 <html>
@@ -69,7 +68,7 @@
                 </div>
                 <div>
                     <h1>List of the course</h1>
-                    <?php foreach($courses as $course){?>
+                    <?php $courses = getCourse(); foreach($courses as $course){?>
                         <h1><?php echo $course[1]; ?></h1>
                         <a href="dashboard.php?del=<?php echo $course[0];?>">Delete Course</a>
                         <a href="editCourse.php?edit=<?php echo $course[0];?>"> Edit Course</a>
@@ -81,11 +80,15 @@
         <div>
             <h1>Your name is <?php $studentDetail = getStudent($_COOKIE['users']); echo $studentDetail['username'];?></h1>
             <h2>List of the courses</h2>
-            <?php foreach($courses as $course){?>
+            <?php $courses1 = getEnrollCourse(); foreach($courses1 as $course){?>
                         <h1><?php echo $course[1]; ?></h1>
                         <a href="dashboard.php?id=<?php echo $course[0];?>">Enroll Now </a>
             <?php } ?>
             <h3>Enrolled Courses</h3>
+            <?php $enroll = getEnrolledCourse(); foreach($enroll as $course){?>
+                        <h1><?php echo $course[1]; ?></h1>
+                        <input type="text" value = "Enrolled" disabled>
+            <?php } ?>
         </div>
     <?php endif; ?>
 </body>
