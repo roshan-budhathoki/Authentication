@@ -1,0 +1,22 @@
+make index.php as your main homepage
+
+create folder (/assets/include/)
+	=> create file functions.php
+	=> config.php
+
+using only functions.php file 
+ ->make a function that validates user login(email, password)
+ ->make a function that validates whether the user has validated email or not
+ ->make a function that checks the email is from @gmail or not, in the same function check 
+	whether the phone number is valid or not.
+ ->create functions according to your need and make a student management system where add student, update student, admin logn,
+	delete student, course and student enrolled courses should be there.
+
+*No queries are allowed at ui pages such as
+*These pages should only have ui components and function calls
+*
+	index.php
+	login.php
+	dashboard.php
+	students.php
+/*every logic should only work in functions.php*/
