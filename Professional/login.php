@@ -1,5 +1,7 @@
 <?php
+    
     include "./assets/include/functions.php";
+
     if(isset($_POST['studentLogin'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
