@@ -1,0 +1,5 @@
+Make a function to secure and sanitize input 
+Make a function that takes array of values, table name, column name and column values that updates into db
+Make a function that takes similar parameter and inserts data into db
+Make a function that returns user ip address and browser details
+Make a function that returns table data into an array where array index will be the value of first column
